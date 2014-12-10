@@ -50,7 +50,7 @@ while (1) {
   if ($best) {
     echo $best->decode();
     for ($j = 0; $j < sizeof($genes); $j++) {
-      if ($best != $genes[$j]) {
+      if ($best !== $genes[$j]) {
         #NSFW
         $genes[$j]->merge($best);
       }
@@ -161,7 +161,7 @@ class Gene {
     
       $ret .= $this->commands[$part];
     
-      if (($i + 1) % $this->cols == 0) {
+      if (($i + 1) % $this->cols === 0) {
         $ret .= "\n";
       }
     }
@@ -302,7 +302,7 @@ class Gene {
         }
 
         #we can't be all on our own, ensure atleast 1 continuation of the line
-        if ($list[1] !== "0001" && $list[5] != "0001") {
+        if ($list[1] !== "0001" && $list[5] !== "0001") {
           $this->fitness -= 0.1;
         }
       } else if ($part === "0010") { #checking \
@@ -332,7 +332,7 @@ class Gene {
         }
 
         #we can't be all on our own, ensure atleast 1 continuation of the line
-        if ($list[7] !== "0010" && $list[3] != "0010") {
+        if ($list[7] !== "0010" && $list[3] !== "0010") {
           $this->fitness -= 0.1;
         }
       }      
@@ -458,8 +458,8 @@ class Gene {
       $singleParts = str_split($part);
       $duplications = $this->duplications[$part];
       for ($j = 0; $j < sizeof($duplications); $j++) {
-        if ($part != $list[$j]) {
-          if ($duplications[$j] == 1) {
+        if ($part !== $list[$j]) {
+          if ($duplications[$j] === 1) {
             #merge them together positively          
             
             #hack
@@ -467,7 +467,7 @@ class Gene {
             if ($chance < $this->duplicationRate) {
               $list[$j] = $part;
             }
-          } else if ($duplications[$j] == -1) {
+          } else if ($duplications[$j] === -1) {
             #merge them together negatively
             
             $chance = mt_rand() / mt_getrandmax();
